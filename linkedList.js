@@ -26,7 +26,6 @@ export class LinkedList {
 
 	prepend = (value) => {
 		let newHead = new Node(value);
-		let oldHead = this.head;
 		newHead.nextNode = oldHead;
 		this.head = newHead;
 		return;
@@ -42,3 +41,4 @@ export class LinkedList {
 		return count;
 	};
 }
+const linkedList = new Li
