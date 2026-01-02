@@ -63,8 +63,8 @@ class LinkedList {
 	}
 
 	pop() {
-		newHead = this.head.next;
-		returnValue = this.head.value;
+		const newHead = this.head.next;
+		const returnValue = this.head.value;
 		this.head = newHead;
 		return returnValue;
 	}
@@ -82,4 +82,4 @@ linkedList.append(1);
 linkedList.append(2);
 linkedList.prepend(0);
 
-console.log(linkedList.at(5));
+console.log(linkedList.pop());
