@@ -9,7 +9,7 @@ class LinkedList {
 		this.head = null;
 	}
 
-	append() {
+	append(value) {
 		const newNode = new Node(value);
 		if (!this.head) {
 			this.head = newNode;
@@ -22,7 +22,7 @@ class LinkedList {
 		current.next = newNode;
 	}
 
-	prepend() {
+	prepend(value) {
 		let newHead = new Node(value);
 		newHead.next = this.head;
 		this.head = newHead;
@@ -53,15 +53,20 @@ class LinkedList {
 	}
 
 	at(index) {
-		if (index === 0) return this.head.value;
-		current = this.head;
-		let count = 1;
-		while (current !== null) {
-			if (index === count) return current.value;
+		if (index > this.size()) return undefined;
+		let current = this.head;
+		for (let i = 0; i < index; i++) {
+			if (current === null) return undefined;
 			current = current.next;
-			count++;
 		}
-		return;
+		return current ? current.value : null;
+	}
+
+	pop() {
+		newHead = this.head.next;
+		returnValue = this.head.value;
+		this.head = newHead;
+		return returnValue;
 	}
 
 	printList = (linkedList) => {
@@ -76,7 +81,5 @@ const linkedList = new LinkedList();
 linkedList.append(1);
 linkedList.append(2);
 linkedList.prepend(0);
-console.log(linkedList.size());
-// console.log(linkedList.size(), linkedList.head.value);
 
-console.log(linkedList.printTail());
+console.log(linkedList.at(5));
