@@ -70,8 +70,8 @@ class LinkedList {
 	}
 
 	printList = (linkedList) => {
-		let linknode = linkedList.head;
-		for (let i = 0; i < linkedList.size(); i++) {
+		let linknode = this.head;
+		for (let i = 0; i < this.size(); i++) {
 			console.log(linknode.value);
 			linknode = linknode.next;
 		}
@@ -83,3 +83,4 @@ linkedList.append(2);
 linkedList.prepend(0);
 
 console.log(linkedList.pop());
+console.log(linkedList.printList());
