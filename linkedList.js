@@ -69,18 +69,45 @@ class LinkedList {
 		return returnValue;
 	}
 
-	printList = (linkedList) => {
+	toString() {
 		let linknode = this.head;
-		for (let i = 0; i < this.size(); i++) {
-			console.log(linknode.value);
+		while (linknode != null) {
+			console.log(`( ${linknode.value} ) ->\t`);
 			linknode = linknode.next;
+			if (linknode == null) {
+				console.log("null");
+				break;
+			}
 		}
-	};
+	}
+
+	contains(value) {
+		if (this.head.value === value) return true;
+		let node = this.head;
+		while (node !== null) {
+			if (node.value === value) return true;
+			node = node.next;
+		}
+		return false;
+	}
+
+	findIndex(value) {
+		let node = this.head;
+		for (let i = 0; i < this.size(); i++) {
+			if (value === node.value) return i;
+			if (node.next === null && node.value !== value) return -1;
+			node = node.next;
+		}
+	}
 }
 const linkedList = new LinkedList();
 linkedList.append(1);
 linkedList.append(2);
 linkedList.prepend(0);
 
-console.log(linkedList.pop());
-console.log(linkedList.printList());
+// console.log(linkedList.pop());
+// console.log(linkedList.pop());
+
+console.log(linkedList.toString());
+
+// console.log(linkedList.contains(1));
