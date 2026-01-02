@@ -1,33 +1,30 @@
 class Node {
-	constructor(value) {
+	constructor(value = 0, next = null) {
 		this.value = value;
-		this.nextNode = null;
+		this.next = next;
 	}
 }
 class LinkedList {
 	constructor() {
-		this.head = new Node();
+		this.head = null;
 	}
 
 	append = (value) => {
-		let node = this.head;
-		if (this.head.nextNode == null) {
-			this.head = new Node(value);
+		const newNode = new Node(value);
+		if (!this.head) {
+			this.head = newNode;
 			return;
 		}
-		do {
-			let currentnode = node.nextNode;
-			if (currentnode.nextNode == null) {
-				let lastNode = new Node(value);
-				currentnode.nextNode = lastNode;
-				return;
-			}
-		} while (node);
+		let current = this.head;
+		while (current.next) {
+			current = current.next;
+		}
+		current.next = newNode;
 	};
 
 	prepend = (value) => {
 		let newHead = new Node(value);
-		newHead.nextNode = this.head;
+		newHead.next = this.head;
 		this.head = newHead;
 		return;
 	};
@@ -35,24 +32,30 @@ class LinkedList {
 	size = () => {
 		let count = 0;
 		let node = this.head;
-		while (node) {
-			count += 1;
-			node = node.nextNode;
+		while (node !== null) {
+			count++;
+			node = node.next;
 		}
 		return count;
+	};
+	head() {
+		if (this.head.value == null) return undefined;
+		return this.head.value;
+	}
+
+	printList = (linkedList) => {
+		let linknode = linkedList.head;
+		for (let i = 0; i < linkedList.size(); i++) {
+			console.log(linknode.value);
+			linknode = linknode.next;
+		}
 	};
 }
 const linkedList = new LinkedList();
 linkedList.append(1);
-console.log(linkedList.head.value);
 linkedList.append(2);
-// console.log(linkedList.head.nextNode.value);
-
+linkedList.prepend(0);
 console.log(linkedList.size());
 // console.log(linkedList.size(), linkedList.head.value);
 
-let linknode = linkedList.head;
-for (let i = 0; i < linkedList.size(); i++) {
-	console.log(linknode.value);
-	linknode = linknode.nextNode;
-}
+console.log(linkedList.head());
