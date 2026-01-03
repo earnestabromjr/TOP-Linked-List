@@ -4,7 +4,7 @@ class Node {
 		this.next = next;
 	}
 }
-class LinkedList {
+export default class LinkedList {
 	constructor() {
 		this.head = null;
 	}
@@ -39,12 +39,12 @@ class LinkedList {
 		return count;
 	}
 	printHead() {
-		if (this.head.value == null) return undefined;
+		if (!this.head || this.head.value == null) return undefined;
 		return this.head.value;
 	}
 
 	printTail() {
-		if (this.head.value == null) return undefined;
+		if (!this.head || this.head.value == null) return undefined;
 		let node = this.head;
 		while (node !== null) {
 			if (node.next === null) return node.value;
@@ -63,25 +63,27 @@ class LinkedList {
 	}
 
 	pop() {
-		const newHead = this.head.next;
+		if (!this.head) return undefined;
 		const returnValue = this.head.value;
-		this.head = newHead;
+		this.head = this.head.next;
 		return returnValue;
 	}
 
 	toString() {
+		if (!this.head) return "null";
+
+		let result = "";
 		let linknode = this.head;
 		while (linknode != null) {
-			console.log(`( ${linknode.value} ) ->\t`);
+			result += `( ${linknode.value} ) -> `;
 			linknode = linknode.next;
-			if (linknode == null) {
-				console.log("null");
-				break;
-			}
 		}
+		result += "null";
+		return result;
 	}
 
 	contains(value) {
+		if (!this.head) return false;
 		if (this.head.value === value) return true;
 		let node = this.head;
 		while (node !== null) {
@@ -100,14 +102,3 @@ class LinkedList {
 		}
 	}
 }
-const linkedList = new LinkedList();
-linkedList.append(1);
-linkedList.append(2);
-linkedList.prepend(0);
-
-// console.log(linkedList.pop());
-// console.log(linkedList.pop());
-
-console.log(linkedList.toString());
-
-// console.log(linkedList.contains(1));
